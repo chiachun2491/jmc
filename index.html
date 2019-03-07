@@ -5,66 +5,25 @@
     <meta charset="utf-8">
     <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
     <meta name="description" content="">
-    <meta name="author" content="">
-    <link rel="icon" href="../../../../favicon.ico">
+    <meta name="author" content="Jeffery">
+<!--    <link rel="icon" href="../../../../favicon.ico">-->
 
-    <title>台科五系大麻賽簽到系統</title>
+    <title>五系大麻賽檢錄系統</title>
 
-      <!-- Bootstrap CSS -->
+      <!-- Bootstrap CSS and jQuery -->
       <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.1.1/css/bootstrap.min.css" integrity="sha384-WskhaSGFgHYWDcbwN70/dfYBj47jz9qbsMId/iRN3ewGhXQFZCSftd1LZCfmhktB" crossorigin="anonymous">
       <script src="https://code.jquery.com/jquery-3.0.0.min.js"></script>
-
-      <!-- Custom styles for this template -->
+      
+      <!-- Custom styles and scripts for this page -->
+      <script src="script/scr.js"></script>
       <link href="css/grid.css" rel="stylesheet">
   </head>
-
-    <script type="text/javascript">
-        $(document).ready(function() {
-
-          $("#checkBtn").on('click',function(){
-            var num = document.getElementById("StdID").value;
-            var check_ori = "https://script.google.com/macros/s/AKfycbxGB6ySgkxh79EubfQWzRDRcKnGbuyBuaer_QCH/exec?id=";
-            var check_dest = check_ori.concat(num,"&callback=?");
-            console.log(check_dest);
-              $.ajaxSetup({
-                  async: false
-              });
-
-              $.getJSON(check_dest, {}, function (data) {
-                  $("#Checked").text(data.Checked);
-                  $("#StdID").val("");
-              });
-          });
-
-          $("#searchBtn").on('click',function(){
-            var num = document.getElementById("StdID").value;
-            var ori = "https://script.google.com/macros/s/AKfycbxTH4a1F36f67G7G1Qlysk7o1S2KDZCsLvT4WgcOViZgo_0Lpai/exec?id=";
-            var dest = ori.concat(num,"&callback=?");
-            console.log(dest);
-              $.ajaxSetup({
-                  async: false
-              });
-
-              $.getJSON(dest, {}, function (data) {
-                  $("#ID").text(data.ID);
-                  $("#Name").text(data.Name);
-                  $("#Dept").text(data.Dept);
-                  $("#Checked").append(data.Checked);
-              });
-          });
-            $('#StdID').keypress(function(e){
-                if(e.keyCode==13)
-                    $('#searchBtn').click();
-            });
-        });
-        
-</script>
 
   <body>
     <div class="container">
 
-      <h1>台科五系大麻賽簽到系統</h1>
-      <p class="lead">請於下方欄位輸入參賽者學號查詢個人資料。</p>
+      <h1>五系大麻賽檢錄系統</h1>
+      <p class="lead">請於下方欄位輸入參賽者學號查詢資料。</p>
 
       <h3>學號輸入</h3>
         <div class="input-group mb-3">
@@ -86,39 +45,55 @@
         </thead>
             
         <tbody>
-          <tr>
-            <th scope="row">學號</th>
-            <td id="ID"></td>
-          </tr>
-          <tr>
-            <th scope="row">姓名</th>
-            <td id="Name"></td>
-          </tr>
-          <tr>
-            <th scope="row">科系</th>
-            <td id="Dept"></td>
-          </tr>
-          <tr>
-            <th scope="row">手機</th>
-            <td id="Phone"></td>
-          </tr>
-          <tr>
-            <th scope="row">時段</th>
-            <td id="Time"></td>
-          </tr>
-          <tr>
-            <th scope="row">桌號</th>
-            <td id="Table"></td>
-          </tr>
-          <tr>
-            <th scope="row">報到狀況</th>
-            <td id="Checked">
-                <button type="button" class="btn btn-secondary" id="checkBtn">點此報到</button>
-              </td>
-          </tr>
-        </tbody>
-      </table>
+            <tr>
+                <th scope="row">編號</th>
+                <td id="PlayerNo"></td>
+            </tr>  
+            <tr>
+                <th scope="row">姓名</th>
+                <td id="Name"></td>
+            </tr>
+            <tr>
+                <th scope="row">學號</th>
+                <td id="ID"></td>
+            </tr>
+            <tr>
+                <th scope="row">科系</th>
+                <td id="Dept"></td>
+            </tr>
+            <tr>
+                <th scope="row">手機</th>
+                <td id="Phone"></td>
+            </tr>
+            <tr>
+                <th scope="row">時段</th>
+                <td id="Period"></td>
+            </tr>
+            <tr>
+                <th scope="row">桌號</th>
+                <td id="Table"></td>
+            </tr>
+            <tr>
+                <th scope="row">退費狀況</th>
+                <td id="Money">
+                    <div id ="MonPos"><button type="button" class="btn" id="moneyBtn" disabled>點此確認退費</button></div>
+                </td>
+            </tr>
+            <tr>
+                <th scope="row">報到狀況</th>
+                <td>
+                    <div id ="BtnPos"><button type="button" class="btn" id="checkBtn" disabled>點此確認報到</button></div>
+                    <div id="Checked"></div>
+                </td>
+            </tr>
+            </tbody>
+        </table>
 
     </div> <!-- /container -->
+
+    <footer class="container">
+      <p>©Copyright 2019 by Jeffery. All rights reversed.</p>
+    </footer>
+      
   </body>
 </html>
