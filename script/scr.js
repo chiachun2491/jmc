@@ -70,8 +70,17 @@
                  height: '+=2rem'
              }, 300);
              $('<div class="alert alert-danger">' + '<strong>授權驗證失敗</strong>：請先' +
-               '<a href="'+ api_url +'&mode=login" class="alert-link">登入</a>。'+
+               '<a href="'+ api_url +'&mode=login" target="_blank" class="alert-link">登入</a>。'+
                '</div>').hide().appendTo('#response').fadeIn(1000);
+             $(".alert").delay(9000).fadeOut(
+                 "normal",
+                 function(){
+                     $(this).remove();
+                 });
+             $("#response").delay(10000).animate({
+                 height: '-=2rem'
+             }, 300);
+
          });
      });
          
