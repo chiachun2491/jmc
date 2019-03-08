@@ -1,6 +1,6 @@
  $(document).ready(function() {
      
-     var api_url = "https://script.google.com/macros/s/AKfycbxTH4a1F36f67G7G1Qlysk7o1S2KDZCsLvT4WgcOViZgo_0Lpai/exec?callback=?";
+     var api_url = "https://script.google.com/macros/s/AKfycbylOAQYrrVJM1F1lhzVVs69ERBqTde_D8FWC_hh9M6ce2e3Ip8u/exec?callback=?";
 
      $('#StdID').keypress(function(e){
          if(e.keyCode==13)
@@ -11,7 +11,8 @@
              
          var num = document.getElementById("StdID").value;
 
-         $.getJSON(api_url, {id:num,mode:'search'}, function (data) {
+         $.getJSON(api_url, {id:num,mode:'search'})
+         .done (function (data) {
              
              console.log(data);
              
@@ -61,8 +62,19 @@
                  $("#checkBtn_2").text('點此報到(2)');  
              }
                     
+         })
+         .fail(function(jqxhr, textStatus, error) {
+             var err = textStatus + ", " + error;
+             console.log( "Request Failed: " + err );
+             $("#response").animate({
+                 height: '+=2rem'
+             }, 300);
+             $('<div class="alert alert-danger">' + '<strong>授權驗證失敗</strong>：請先' +
+               '<a href="'+ api_url +'&mode=login" class="alert-link">登入</a>。'+
+               '</div>').hide().appendTo('#response').fadeIn(1000);
          });
      });
+         
      $("#moneyBtn").on('click',function(){
          
          var num = document.getElementById("ID").textContent;
@@ -108,7 +120,5 @@
                  }
          });
      });
-            
-
  });
         
