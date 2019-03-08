@@ -22,12 +22,12 @@
              $("#Table").text(data.Table);
              $("#Period").text(data.Period);
              $("#PlayerNo").text(data.playerNo);
-             if (data.Money != 0)
+             if (data.Money)
                  {
-                     if (data.Back!=0)
+                     if (data.Back!='#N/A')
                          {
                              $("#moneyBtn").prop('disabled', true); //TO DISABLE
-                             $("#moneyBtn").text('已完成退費');                   
+                             $("#moneyBtn").text('退費已完成');                   
                          }
                      else
                          {
@@ -40,16 +40,25 @@
                      $("#moneyBtn").prop('disabled', true); //TO DISABLE
                      $("#moneyBtn").text('無須退費');
                  }
-             if (data.Checked !=0)
+             if (data.Checked_1 !='#N/A')
              {
-                 $("#checkBtn").prop('disabled', true); //TO DISABLE
-                 $("#checkBtn").text('已完成報到');
+                 $("#checkBtn_1").prop('disabled', true); //TO DISABLE
+                 $("#checkBtn_1").text('已完成報到(1)');
              }
              else
              {
-                 $("#checkBtn").prop('disabled', false); //TO ENABLE
-                 // $("#checkBtn").addClass('btn-success');
-                 $("#checkBtn").text('點此確認報到');  
+                 $("#checkBtn_1").prop('disabled', false); //TO ENABLE
+                 $("#checkBtn_1").text('點此報到(1)');  
+             }
+             if (data.Checked_2 !='#N/A')
+             {
+                 $("#checkBtn_2").prop('disabled', true); //TO DISABLE
+                 $("#checkBtn_2").text('已完成報到(2)');
+             }
+             else
+             {
+                 $("#checkBtn_2").prop('disabled', false); //TO ENABLE
+                 $("#checkBtn_2").text('點此報到(2)');  
              }
                     
          });
@@ -69,18 +78,33 @@
          });
      });
      
-     $("#checkBtn").on('click',function(){
+     $("#checkBtn_1").on('click',function(){
          
          var num = document.getElementById("ID").textContent;
          
-         $.getJSON(api_url, {id:num,mode:'check'}, function (data) {
+         $.getJSON(api_url, {id:num,mode:'check',round:1}, function (data) {
              
              console.log(data);
              if (data.resultStr == 'checked')
                  {
                      $("#StdID").val("");
-                     $("#checkBtn").prop('disabled', true); //TO DISABLE
-                     $("#checkBtn").text('已確認報到');
+                     $("#checkBtn_1").prop('disabled', true); //TO DISABLE
+                     $("#checkBtn_1").text('已報到成功');
+                 }
+         });
+     });
+     $("#checkBtn_2").on('click',function(){
+         
+         var num = document.getElementById("ID").textContent;
+         
+         $.getJSON(api_url, {id:num,mode:'check',round:2}, function (data) {
+             
+             console.log(data);
+             if (data.resultStr == 'checked')
+                 {
+                     $("#StdID").val("");
+                     $("#checkBtn_2").prop('disabled', true); //TO DISABLE
+                     $("#checkBtn_2").text('已報到成功');
                  }
          });
      });
