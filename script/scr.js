@@ -1,17 +1,100 @@
- $(document).ready(function() {
-     
-     var api_url = "https://script.google.com/macros/s/AKfycbylOAQYrrVJM1F1lhzVVs69ERBqTde_D8FWC_hh9M6ce2e3Ip8u/exec?callback=?";
+var api_url = "https://script.google.com/macros/s/AKfycbylOAQYrrVJM1F1lhzVVs69ERBqTde_D8FWC_hh9M6ce2e3Ip8u/exec?callback=?";
 
+$(document).ready(function() {
+     
+    
      $('#StdID').keypress(function(e){
          if(e.keyCode==13)
              $('#searchBtn').click();
+     });
+         $('#UIDnum').keypress(function(e){
+         if(e.keyCode==13)
+             $('#UIDsearchBtn').click();
+     });
+         $('#UIDnum_keyin').keypress(function(e){
+         if(e.keyCode==13)
+             $('#UIDkeyinBtn').click();
      });
 
      $("#searchBtn").on('click',function(){
              
          var num = document.getElementById("StdID").value;
+         search(num,'search');
+     });
+    
+    $("#UIDsearchBtn").on('click',function(){
+             
+         var num = document.getElementById("UIDnum").value;
+         search(num,'UIDsearch');
+     });
+         
+     $("#moneyBtn").on('click',function(){
+         
+         var num = document.getElementById("ID").textContent;
+         
+         $.getJSON(api_url, {id:num,mode:'money'}, function (data) {
+             
+             console.log(data);
+             if (data.resultStr == 'moneyed')
+                 {
+                     $("#moneyBtn").prop('disabled', true); //TO DISABLE
+                     $("#moneyBtn").text('已確認退費');
+                 }
+         });
+     });
+     
+     $("#checkBtn_1").on('click',function(){
+         
+         var num = document.getElementById("ID").textContent;
+         
+         $.getJSON(api_url, {id:num,mode:'check',round:1}, function (data) {
+             
+             console.log(data);
+             if (data.resultStr == 'checked')
+                 {
+                     $("#StdID").val("");
+                     $("#UIDnum").val("");
+                     $("#checkBtn_1").prop('disabled', true); //TO DISABLE
+                     $("#checkBtn_1").text('已報到成功');
+                 }
+         });
+     });
+     $("#checkBtn_2").on('click',function(){
+         
+         var num = document.getElementById("ID").textContent;
+         
+         $.getJSON(api_url, {id:num,mode:'check',round:2}, function (data) {
+             
+             console.log(data);
+             if (data.resultStr == 'checked')
+                 {
+                     $("#StdID").val("");
+                     $("#UIDnum").val("");
+                     $("#checkBtn_2").prop('disabled', true); //TO DISABLE
+                     $("#checkBtn_2").text('已報到成功');
+                 }
+         });
+     });
+         $("#UIDkeyinBtn").on('click',function(){
+         
+         var num = document.getElementById("ID").textContent;
+             var UID = document.getElementById("UIDnum_keyin").value;
+         
+         $.getJSON(api_url, {id:num,mode:'UIDkeyin',UID:UID}, function (data) {
+             
+             console.log(data);
+             if (data.resultStr == 'keyined')
+                 {
+                     $("#UIDnum_keyin").prop('disabled',true);
+                     $("#UIDkeyinBtn").prop('disabled', true); //TO DISABLE
+                     $("#UIDkeyinBtn").text('已建檔');
+                 }
+         });
+     });
+ });
 
-         $.getJSON(api_url, {id:num,mode:'search'})
+function search(num,mode){
+    $.getJSON(api_url, {id:num,mode:mode})
          .done (function (data) {
              
              console.log(data);
@@ -23,6 +106,21 @@
              $("#Table").text(data.Table);
              $("#Period").text(data.Period);
              $("#PlayerNo").text(data.playerNo);
+        $("#UIDnum_keyin").val(data.UID);
+            
+        if (data.UID=='')
+            {
+                $("#UIDnum_keyin").prop('disabled',false);
+                                             $("#UIDkeyinBtn").prop('disabled', false); //TO ENABLE
+                             $("#UIDkeyinBtn").text('輸入');  
+            }
+        else{
+            $("#UIDnum_keyin").prop('disabled',true);
+            $("#UIDkeyinBtn").prop('disabled', true); //TO ENABLE
+                             $("#UIDkeyinBtn").text('已建檔');  
+            
+        }
+
              if (data.Money)
                  {
                      if (data.Back!='#N/A')
@@ -82,52 +180,4 @@
              }, 300);
 
          });
-     });
-         
-     $("#moneyBtn").on('click',function(){
-         
-         var num = document.getElementById("ID").textContent;
-         
-         $.getJSON(api_url, {id:num,mode:'money'}, function (data) {
-             
-             console.log(data);
-             if (data.resultStr == 'moneyed')
-                 {
-                     $("#moneyBtn").prop('disabled', true); //TO DISABLE
-                     $("#moneyBtn").text('已確認退費');
-                 }
-         });
-     });
-     
-     $("#checkBtn_1").on('click',function(){
-         
-         var num = document.getElementById("ID").textContent;
-         
-         $.getJSON(api_url, {id:num,mode:'check',round:1}, function (data) {
-             
-             console.log(data);
-             if (data.resultStr == 'checked')
-                 {
-                     $("#StdID").val("");
-                     $("#checkBtn_1").prop('disabled', true); //TO DISABLE
-                     $("#checkBtn_1").text('已報到成功');
-                 }
-         });
-     });
-     $("#checkBtn_2").on('click',function(){
-         
-         var num = document.getElementById("ID").textContent;
-         
-         $.getJSON(api_url, {id:num,mode:'check',round:2}, function (data) {
-             
-             console.log(data);
-             if (data.resultStr == 'checked')
-                 {
-                     $("#StdID").val("");
-                     $("#checkBtn_2").prop('disabled', true); //TO DISABLE
-                     $("#checkBtn_2").text('已報到成功');
-                 }
-         });
-     });
- });
-        
+}

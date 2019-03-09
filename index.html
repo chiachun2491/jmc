@@ -32,6 +32,14 @@
                 <button class="btn btn-primary" type="button" id="searchBtn">搜尋</button>
             </div>
         </div>
+        <hr>
+              <h3>UID感應輸入</h3>
+        <div class="input-group mb-3">
+            <input type="text" class="form-control" placeholder="請感應學生證" aria-describedby="basic-addon2" id="UIDnum">
+            <div class="input-group-append">
+                <button class="btn btn-primary" type="button" id="UIDsearchBtn">搜尋</button>
+            </div>
+        </div>
         <div id="response"></div>
         
       <hr>
@@ -86,6 +94,17 @@
                     <button type="button" class="btn btn-secondary" id="checkBtn_1" disabled>報到(1)</button>
                     <button type="button" class="btn btn-secondary" id="checkBtn_2" disabled>報到(2)</button>
                     <div id="Checked"></div>
+                </td>
+            </tr>
+            <tr>
+                <th scope="row">UID狀況</th>
+                <td>
+                    <div class="input-group mb-3">
+                        <input type="text" class="form-control" placeholder="請感應學生證" aria-describedby="basic-addon2" id="UIDnum_keyin">
+                        <div class="input-group-append">
+                            <button class="btn btn-success" type="button" id="UIDkeyinBtn">送出</button>
+                        </div>
+        </div>
                 </td>
             </tr>
             </tbody>
