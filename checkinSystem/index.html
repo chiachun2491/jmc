@@ -20,26 +20,45 @@
   </head>
 
   <body>
+      
+          <div class="d-flex flex-column flex-md-row align-items-center p-3 px-md-4 mb-3 bg-white border-bottom box-shadow">
+      <h5 class="my-0 mr-md-auto font-weight-normal">台科五系大麻賽</h5>
+      <nav class="my-2 my-md-0 mr-md-3">
+        <a class="p-2 text-dark" href="../checkinSystem/index.html">檢錄系統</a>
+        <a class="p-2 text-dark" href="../grade/index.html">成績列表</a>
+        <a class="p-2 text-dark" href="https://www.facebook.com/events/1181676268674234/">Facebook</a>
+      </nav>
+<!--      <a class="btn btn-outline-primary" href="#">Sign up</a>-->
+    </div>
+
+      
     <div class="container">
 
       <h1>五系大麻賽檢錄系統</h1>
       <p class="lead">請於下方欄位輸入參賽者學號查詢資料。</p>
-
-      <h3>學號輸入</h3>
-        <div class="input-group mb-3">
+        
+        <form>
+  <div class="row">
+    <div class="col-6">
+        <h3>學號輸入</h3>
+              <div class="input-group mb-3">
             <input type="text" class="form-control" placeholder="請輸入學號" aria-describedby="basic-addon2" id="StdID">
             <div class="input-group-append">
                 <button class="btn btn-primary" type="button" id="searchBtn">搜尋</button>
             </div>
         </div>
-        <hr>
-              <h3>UID感應輸入</h3>
-        <div class="input-group mb-3">
+    </div>
+    <div class="col-6">
+         <h3>UID感應輸入</h3>
+              <div class="input-group mb-3">
             <input type="text" class="form-control" placeholder="請感應學生證" aria-describedby="basic-addon2" id="UIDnum">
             <div class="input-group-append">
                 <button class="btn btn-primary" type="button" id="UIDsearchBtn">搜尋</button>
             </div>
         </div>
+    </div>
+  </div>
+</form>
         <div id="response"></div>
         
       <hr>
@@ -100,9 +119,9 @@
                 <th scope="row">UID狀況</th>
                 <td>
                     <div class="input-group mb-3">
-                        <input type="text" class="form-control" placeholder="請感應學生證" aria-describedby="basic-addon2" id="UIDnum_keyin">
+                        <input type="text" class="form-control" placeholder="請感應學生證" aria-describedby="basic-addon2" id="UIDnum_keyin" disabled >
                         <div class="input-group-append">
-                            <button class="btn btn-success" type="button" id="UIDkeyinBtn">送出</button>
+                            <button class="btn btn-success" type="button" id="UIDkeyinBtn" disabled>送出</button>
                         </div>
         </div>
                 </td>

@@ -111,7 +111,7 @@ function search(num,mode){
         if (data.UID=='')
             {
                 $("#UIDnum_keyin").prop('disabled',false);
-                                             $("#UIDkeyinBtn").prop('disabled', false); //TO ENABLE
+                                             $("#UIDkeyinBtn").prop('disabled', false); //TO DISABLE
                              $("#UIDkeyinBtn").text('輸入');  
             }
         else{
