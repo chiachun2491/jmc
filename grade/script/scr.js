@@ -1,4 +1,4 @@
-var api_url = "https://script.google.com/a/gapps.ntust.edu.tw/macros/s/AKfycby4qIvcfyjf5c8Z5Y9EioEgCMzdDgMk8wKno43fnw5p/exec?callback=?";
+var api_url = "https://script.google.com/macros/s/AKfycbz6a7IvH4M-DM50m_wlt--w6V2HCzDMXSArAhigY1_iBlPIS08/exec?callback=?";
 
 $(document).ready(function() {
     
@@ -65,7 +65,8 @@ $(document).ready(function() {
 function load(){
 
  var mode = $('select  option:selected').val();
-        $.getJSON(api_url, {mode:mode}, function (obj) {
+        $.getJSON(api_url, {mode:mode})
+            .done( function (obj) {
              
 var trStr = '';//動態拼接table
 
@@ -84,8 +85,28 @@ var trStr = '';//動態拼接table
         trStr  += '</tr>';
         console.log(trStr);
         });
-
-
+                        
     $("#tbody").html(trStr);
+         })
+
+         .fail(function(jqxhr, textStatus, error) {
+             var err = textStatus + ", " + error;
+             console.log( "Request Failed: " + err );
+             $("#response").animate({
+                 height: '+=2rem'
+             }, 300);
+             $('<div class="alert alert-danger">' + '<strong>授權驗證失敗</strong>：請先' +
+               '<a href="'+ api_url +'&mode=login" target="_blank" class="alert-link">登入</a>。'+
+               '</div>').hide().appendTo('#response').fadeIn(1000);
+             $(".alert").delay(9000).fadeOut(
+                 "normal",
+                 function(){
+                     $(this).remove();
+                 });
+             $("#response").delay(10000).animate({
+                 height: '-=2rem'
+             }, 300);
+
          });
+
 }
