@@ -72,14 +72,20 @@ var trStr = '';//動態拼接table
 
     $.each(obj.list, function(i, item) {
             //now you can access properties using dot notation
-                trStr  += '<tr>';//拼接處規範的表格形式
-        trStr  += '<th scope="row">' +  obj.list[i].table  + '</th>';//資料表的主鍵值
+        console.log(obj.list[i]);
+                trStr  += '<tr>';
+        trStr  += '<th scope="row">' +  obj.list[i].table  + '</th>';
         
         $.each(obj.list[i].player, function(j, item){
         trStr  += '<td><div class="input-group input-group-sm mb-3"><div class="input-group-prepend">';
-        trStr  += '<span class="input-group-text">'  + obj.list[i].player[j].name + '</span>';
+            trStr  += '<span class="input-group-text"';
+            if(obj.list[i].player[j].win)
+                {
+                    trStr += ' style="background-color:green; color:white;"'
+                }
+        trStr  += ' >'  + obj.list[i].player[j].name + '</span>';
         trStr  += '<span class="input-group-text">'  + obj.list[i].player[j].grade + '</span></div>';
-        trStr  += '</div><span class="badge badge-success">' +  obj.list[i].player[j].status  + '</span></td>';
+        trStr  += '</div><span class="badge badge-warning">' + obj.list[i].player[j].memo + '</span></td>';
                });
 
         trStr  += '</tr>';
