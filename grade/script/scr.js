@@ -77,15 +77,31 @@ var trStr = '';//動態拼接table
         trStr  += '<th scope="row">' +  obj.list[i].table  + '</th>';
         
         $.each(obj.list[i].player, function(j, item){
-        trStr  += '<td><div class="input-group input-group-sm mb-3"><div class="input-group-prepend">';
-            trStr  += '<span class="input-group-text"';
-            if(obj.list[i].player[j].win)
-                {
-                    trStr += ' style="background-color:green; color:white;"'
-                }
-        trStr  += ' >'  + obj.list[i].player[j].name + '</span>';
-        trStr  += '<span class="input-group-text">'  + obj.list[i].player[j].grade + '</span></div>';
-        trStr  += '</div><span class="badge badge-warning">' + obj.list[i].player[j].memo + '</span></td>';
+        trStr  += '<td><div class="btn-group btn-group-sm" role="group" aria-label="First group">';
+            trStr += '<button type="button" disabled ';
+            
+            if (obj.list[i].player[j].win==1) trStr += 'class="btn btn-success">';
+            else if (obj.list[i].player[j].win==2) trStr += 'class="btn btn-primary">';
+            else trStr += 'class="btn btn-secondary">';
+            
+           trStr += obj.list[i].player[j].name +'</button><button type="button" disabled class="btn btn-outline-';
+            
+            if (obj.list[i].player[j].win==1) trStr += 'success">';
+            else if (obj.list[i].player[j].win==2) trStr += 'primary">';
+            else trStr += 'secondary">';
+
+            if (obj.list[i].player[j].memo =="棄賽")
+            {
+                trStr += '<span class="badge badge-warning">' + obj.list[i].player[j].memo + '</span></div></td>';
+            }
+            else{
+                trStr += '<span class="badge badge-secondary">';
+                trStr += obj.list[i].player[j].first + '</span>+<span class="badge badge-secondary">';
+                trStr += obj.list[i].player[j].second + '</span>=<span class="badge badge-secondary">';
+                trStr += obj.list[i].player[j].grade + '</span></div></span></button>';
+
+                trStr  += '</div><div><span class="badge badge-warning">' + obj.list[i].player[j].memo + '</span></div></td>';
+            }
                });
 
         trStr  += '</tr>';
