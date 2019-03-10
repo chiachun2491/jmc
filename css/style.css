@@ -42,3 +42,10 @@ body {
   border-top-left-radius: 0;
   border-top-right-radius: 0;
 }
+
+footer {
+    margin-top: 2rem;
+    text-align: center;
+    font-size: 0.9rem;
+    color: gray;
+}
