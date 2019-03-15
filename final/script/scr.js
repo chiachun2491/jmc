@@ -11,11 +11,10 @@ function getPlayerList() {
         obj.list.sort((a,b) => (a.status > b.status) ? 1 : ((b.status > a.status) ? -1 : 0)); 
 
         $.each(obj.list, function(i, item) {             
-            if (obj.list[i].status==4) styleStr = 'success">';
+            if (obj.list[i].status<=4) styleStr = 'success">';
             else if (obj.list[i].status==16) styleStr = 'primary">';
             else styleStr = 'secondary">';
                 
-            console.log(obj.list[i]);
             trStr +='<div class="col-md-3"><div class="btn-group" role="group" aria-label="First group">';
             trStr +='<button type="button" disabled class="btn btn-'+ styleStr;
             trStr += obj.list[i].name + '</button><button type="button" disabled class="btn btn-outline-';
@@ -23,6 +22,7 @@ function getPlayerList() {
         });
                         
         $("#row-table").html(trStr);
+        console.log("append");
         setTimeout('getPlayerList()',10000);
     })
 
@@ -35,9 +35,7 @@ function getPlayerList() {
         $('<div class="alert alert-danger">' + '<strong>Fail</strong>：' +
           err  +  '</div>').hide().appendTo('#response').fadeIn(1000);
         $(".alert").delay(9000).fadeOut("normal",function(){$(this).remove();});
-        $("#response").delay(10000).animate({height: '-=2rem'    
-        }, 300);
-        
+        $("#response").delay(10000).animate({height: '-=2rem'}, 300);
     });
 
  }
