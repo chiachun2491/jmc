@@ -11,7 +11,7 @@ function getPlayerList() {
 
         $.each(obj.list, function(i, item) {             
             if (obj.list[i].status<=4) styleStr = 'success">';
-            else if (obj.list[i].status==16) styleStr = 'primary">';
+            else if (obj.list[i].status<=16) styleStr = 'primary">';
             else styleStr = 'secondary">';
 
             trStr +='<div class="col-md-3">';
