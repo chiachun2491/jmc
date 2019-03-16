@@ -14,10 +14,14 @@ function getPlayerList() {
             else if (obj.list[i].status==16) styleStr = 'primary">';
             else styleStr = 'secondary">';
 
-            trStr +='<div class="col-md-3"><div class="btn-group" role="group" aria-label="First group">';
+            trStr +='<div class="col-md-3">';
+            if(obj.list[i].status<=8){
+                trStr += '<div><span class="badge badge-warning">第'+obj.list[i].status+'名</span></div>';
+            }
+            trStr +='<div class="btn-group" role="group" aria-label="First group">';
             trStr +='<button type="button" disabled class="btn btn-'+ styleStr;
             trStr += obj.list[i].name + '</button><button type="button" disabled class="btn btn-outline-';
-            trStr += styleStr + obj.list[i].stdID+'</button></div><div><span class="badge badge-warning"></span></div></div>'
+            trStr += styleStr + obj.list[i].stdID+'</button></div></div>'
         });
                         
         $("#row-table").html(trStr);

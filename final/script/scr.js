@@ -6,7 +6,6 @@ function getPlayerList() {
     
     $.getJSON(api_url, {mode:"final"})
         .done( function (obj) {
-             
         var trStr = '';
         obj.list.sort((a,b) => (a.status > b.status) ? 1 : ((b.status > a.status) ? -1 : 0)); 
 
@@ -14,11 +13,15 @@ function getPlayerList() {
             if (obj.list[i].status<=4) styleStr = 'success">';
             else if (obj.list[i].status==16) styleStr = 'primary">';
             else styleStr = 'secondary">';
-                
-            trStr +='<div class="col-md-3"><div class="btn-group" role="group" aria-label="First group">';
+
+            trStr +='<div class="col-md-3">';
+            if(obj.list[i].status<=8){
+                trStr += '<div><span class="badge badge-warning">第'+obj.list[i].status+'名</span></div>';
+            }
+            trStr +='<div class="btn-group" role="group" aria-label="First group">';
             trStr +='<button type="button" disabled class="btn btn-'+ styleStr;
             trStr += obj.list[i].name + '</button><button type="button" disabled class="btn btn-outline-';
-            trStr += styleStr + obj.list[i].stdID+'</button></div><div><span class="badge badge-warning"></span></div></div>'
+            trStr += styleStr + obj.list[i].stdID+'</button></div></div>'
         });
                         
         $("#row-table").html(trStr);
@@ -29,9 +32,7 @@ function getPlayerList() {
         .fail(function(jqxhr, textStatus, error) {
         var err = textStatus + ", " + error;
         console.log( "Request Failed: " + err );
-        $("#response").animate({
-            height: '+=2rem'
-        }, 300);
+        $("#response").animate({height: '+=2rem'}, 300);
         $('<div class="alert alert-danger">' + '<strong>Fail</strong>：' +
           err  +  '</div>').hide().appendTo('#response').fadeIn(1000);
         $(".alert").delay(9000).fadeOut("normal",function(){$(this).remove();});

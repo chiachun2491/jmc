@@ -90,7 +90,7 @@ function load(){
 
             $("#tbody").html(trStr);
             console.log("append");
-            setTimeout('load()',10000);
+            setTimeout('load()',5000);
         })
 
             .fail(function(jqxhr, textStatus, error) {
