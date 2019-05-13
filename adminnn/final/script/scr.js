@@ -1,6 +1,6 @@
 var api_url = "https://script.google.com/macros/s/AKfycbz6a7IvH4M-DM50m_wlt--w6V2HCzDMXSArAhigY1_iBlPIS08/exec?callback=?";
 
-$(document).ready(getPlayerList());
+// $(document).ready(getPlayerList());
 
 function getPlayerList() {
     
